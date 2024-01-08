@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zony Generator Nicków</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f1f1;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        
+        .input {
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+            font-weight: 500;
+            font-size: .8vw;
+            color: #fff;
+            background-color: rgb(28,28,30);
+            box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
+            border-radius: 0.4vw;
+            border: none;
+            outline: none;
+            padding: 0.4vw;
+            max-width: 190px;
+            transition: .4s;
+        }       
+
+        .input:hover {
+            box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+        }
+
+        .input:focus {
+             box-shadow: 0 0 0 .15vw skyblue;
+        }
+
+        .button {
+            padding: 10px 20px;
+            border: none;
+            font-size: 17px;
+            color: #fff;
+            border-radius: 7px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.5s;
+            transition-property: box-shadow;
+        }
+
+        .button {
+            background: rgb(0,140,255);
+            box-shadow: 0 0 25px rgb(0,140,255);
+        }
+
+        .button:hover {
+            box-shadow: 0 0 5px rgb(0,140,255),
+                        0 0 25px rgb(0,140,255),
+                        0 0 50px rgb(0,140,255),
+                        0 0 100px rgb(0,140,255);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #pozdro {
+            margin-top: 30px;
+            font-size: 24px;
+            color: #333;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Zony Generator Nicków</h1>
+    <spacer type="vertical" width="100" height="6000"> ⠀ </spacer>
+    <spacer type="vertical" width="100" height="6000"> ⠀ </spacer>
+
+    <input type="text" class="input" id="name" placeholder="Imię">
+    <spacer type="vertical" width="100" height="6000"> ⠀ </spacer>
+    <spacer type="vertical" width="100" height="6000"> ⠀ </spacer>
+    <spacer type="vertical" width="100" height="6000"> ⠀ </spacer>
+    <spacer type="vertical" width="100" height="6000"> ⠀ </spacer>
+
+    <button onclick="generateRandomWord()">Generuj Nick!</button>
+
+    <div id="result"></div>
+
+    <div id="pozdro">Pozdro!</div>
+
+    <script>
+        var words = ["jabłko", "kot", "samochód", "telefon", "kawa", "książka", "kwiat", "spacer", "muzyka", "internet",
+                     "rower", "piłka", "pizza", "gra", "deska", "drzewo", "woda", "dom", "słońce", "księżyc",
+                     "chmura", "kwiatek", "grzyb", "śmieci", "laptop", "telewizor", "samolot", "kierowca", "dziecko", "serce",
+                     "motocykl", "kwaczor", "ślimak", "pająk", "złodziej", "książę", "księżniczka", "kotlet", "trampolina", "skrzynia",
+                     "długopis", "zeszyt", "komputer", "ekran", "szklanka", "księga", "papier", "lampka", "telefon",
+                     "kwiatek", "motyl", "klucz", "kompas", "jajko", "samiec", "samica", "klawiatura", "mysz", "kabel",
+                     "plakat", "hamburger", "perła", "niedźwiedź", "słonik", "łąka", "orkiestra", "dźwig", "bąbel", "szafa",
+                     "księgowy", "muzeum", "pociąg", "ryba", "gitara", "las", "portfel", "aparat", "piasek", "kamień",
+                     "kosmiczny", "szaman", "mango", "kwiatonator", "kakao", "bambus", "frisbee", "kaktus", "bumerang", "pianino",
+                     "ambrozja", "flamenco", "delfin", "czekolada", "koturny", "ananas", "konglomerat", "hipopotam", "trambambula", "egzoplaneta",
+                     "fotelik", "plon", "szept", "akwarela", "ekosystem", "samowar", "neutron", "pangolina", "jaskółka", "guacamole",
+                     "marsjański", "akordeon", "balonik", "szyfon", "galaktyka", "merengue", "ekliptyka", "intarsja", "kielbasa", "szyszka"];
+
+        function generateRandomWord() {
+            var nameInput = document.getElementById('name').value;
+            var resultElement = document.getElementById('result');
+            var pozdroElement = document.getElementById('pozdro');
+            
+            resultElement.innerHTML = "";
+            pozdroElement.style.display = 'none';
+
+            // Pokaż wszystkie słowa przez ułamek sekundy
+            for (var i = 0; i < words.length; i++) {
+                setTimeout(function(index) {
+                    resultElement.innerHTML = `<p>${nameInput} ${words[index]}</p>`;
+                }, i * 50, i);
+            }
+            resultElement.style.opacity = '1';
+
+            // Spowolnij obracanie się, aż jedno słowo zostanie wybrane
+            setTimeout(function() {
+                var randomIndex = Math.floor(Math.random() * words.length);
+                var randomWord = words[randomIndex];
+                resultElement.innerHTML = `<p>${nameInput} ${randomWord}</p>`;
+                
+                // Wyświetl "Pozdro!"
+                pozdroElement.style.display = 'block';
+                setTimeout(function() {
+                    pozdroElement.style.opacity = '1';
+                }, 10);
+            }, words.length * 50);
+        }
+    </script>
+
+</body>
+</html>
